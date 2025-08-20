@@ -1,0 +1,16 @@
+.red-box {
+  background-color: rgba(139, 0, 0, 0.8);
+
+  display: flex;
+  justify-content: center;
+
+  position: relative;
+}
+
+.red-box.top {
+  right: 6rem;
+}
+
+.red-box.bottom {
+  left: 6rem;
+}

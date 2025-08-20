@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&family=Spirax&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a,
+h2 {
+  font-family: 'Spirax', sans-serif;
+  text-transform: capitalize;
+}
+
+p {
+  color: whitesmoke;
+  font-family: 'Poiret One', sans-serif;
+  font-size: 1.2rem;
+}
+
+h2 {
+  color: darkred;
+  font-size: 5rem;
+}
+
+.g-box {
+  padding-block: 1rem;
+  width: 500px;
+}

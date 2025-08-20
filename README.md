@@ -1,69 +1,53 @@
-# React + TypeScript + Vite
+# Exercise: Caffe Retro Solution – React Edition
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Now it’s time to revisit the **Caffe Retro** exercise – but this time, you’ll build it using **React**.
 
-Currently, two official plugins are available:
+👉 If you haven’t done the original version yet, or if you need a refresher, you can find the HTML/CSS version here:
+**[Original Caffe Retro – HTML/CSS version](https://github.com/Lexicon-LTU-2025/exercise-html-css-caffe-retro)**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Goal
 
-## Expanding the ESLint configuration
+You are going to **recreate the same website** using **React**. The visual design and functionality should be the same, but now you’re expected to apply a **React mindset**:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Think in components**: split the UI into meaningful, reusable parts (e.g. `Nav`, `Section`, `Header`, etc).
+- **Use props** to pass data between components when needed.
+- Use semantic HTML inside your React components.
+- **Keep your code clean and organized** – folder structure matters.
+- **Reusability is key** – avoid duplicating similar markup across the app.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Instructions
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+The core **requirements remain the same** as in the original assignment. That means:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Three full-screen sections: **Hot**, **Juice**, and **Cozy**.
+- A fixed top **navigation bar** linking to each section.
+- **Background images** that fully cover each section.
+- **Semantic HTML**, **responsive design**, and **basic accessibility** must be respected.
+- Use only assets provided in the `assets` folder – no custom fonts or images.
+
+But this time, it’s your job to **interpret those instructions through React**.
+
+## Public folder
+
+In Vite, the **`public/`** folder is special: everything placed inside it will be copied **as-is** to the root of your project when you build. That means no hashing, no optimization, and the files keep their original names and paths.
+
+This makes the `public/` folder useful when you want **fixed URLs** or when you want to **emulate fetching data from a backend**. For example, if you place a `data.json` file inside `public/`, you can fetch it just like you would from a real API:
+
+```tsx
+useEffect(() => {
+  fetch('/data.json')
+    .then((res) => res.json())
+    .then((data) => setSections(data));
+}, []);
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+This way, your React app can read structured data (like section content) without hardcoding it in the codebase — a good first step toward working with real APIs and databases.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### `public/` vs `src/assets/`
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Image location    | Example in code                                                               | What happens at build                                                                                 | When to use                                                                  |
+| ----------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| **`public/`**     | `<img src="/hot.jpg" alt="Hot" />`                                            | File is copied **as-is**; **no hashing**, same URL (`/hot.jpg`).                                      | Fixed URLs, global/static files, JSON data to fetch, favicons, robots.txt.   |
+| **`src/assets/`** | `jsx<br/>import hot from './assets/hot.jpg';<br/><img src={hot} alt="Hot" />` | Processed by Vite; file gets a **hashed name** (e.g. `/assets/hot.abc123.jpg`) for **cache-busting**. | Component-scoped assets that should be optimized and versioned with the app. |
+
+In this solution, I use `public/data.json` and `public/links.json` to **emulate a backend fetch**, and background images can also be referenced from `public/` (e.g. `/hot.jpg`).

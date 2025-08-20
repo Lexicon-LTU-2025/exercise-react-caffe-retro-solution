@@ -1,0 +1,17 @@
+.page {
+  background-position: center;
+  background-size: cover;
+  border-bottom: 1rem solid darkred;
+  box-sizing: content-box;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.page:last-child {
+  border-bottom: none;
+}

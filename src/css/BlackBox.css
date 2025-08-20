@@ -1,0 +1,9 @@
+.black-box {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding-inline: 4rem;
+}
+
+.black-box .row {
+  display: flex;
+  justify-content: space-between;
+}
